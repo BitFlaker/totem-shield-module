@@ -9,10 +9,11 @@
 #define ADJ  3
 
 &mt {
-  /* tapping-term-ms = <170>; */
+    /* tapping-term-ms = <170>; */
+
     quick-tap-ms = <250>;
     /* flavor = "hold-preferred"; */
-  /* global-quick-tap; */
+    /* global-quick-tap; */
 };
 
 &lt {
@@ -23,13 +24,11 @@
     require-prior-idle-ms = <250>;
 };
 
-&sk {
-    quick-release;
-};
+&sk { quick-release; };
 
 / {
     behaviors {
-       /*
+        /*
         *
         */
         caps_tdr: caps_tap_dance_right {
@@ -47,8 +46,7 @@
             bindings = <&slt 1 LSHFT>, <&caps_word>;
         };
 
-
-       /*   Custom mod-tap/layer-tap behavior.
+        /*   Custom mod-tap/layer-tap behavior.
         *   The main idea is to accomodate
         *   the one-shot (i.e. sticky) mods.
         */
@@ -71,7 +69,7 @@
             display-name = "Sticky-Mod-Tap";
         };
 
-       /*   CTRL -based behavior of what would normally be a plain SPACE.
+        /*   CTRL -based behavior of what would normally be a plain SPACE.
         *   Implemented as nested mod-morphs. The main idea is that `space`
         *   and `comma` are among the most commonly typed characters; hence
         *   their optimized placement (again, not without some individual
@@ -92,7 +90,7 @@
             mods = <(MOD_LCTL)>;
         };
 
-       /*   Quasi-Shift behavior for certain keys.
+        /*   Quasi-Shift behavior for certain keys.
         *   In the traditional QWERTY layout/keyboard proper,
         *   pairs of non-alphanumeric symbols seem to be tightly coupled
         *   with one another via Shift Mod Key (e.g. / and ? ).
@@ -134,7 +132,7 @@
             mods = <MOD_RCTL>;
         };
 
-       /*
+        /*
         *
         *
         */
@@ -146,36 +144,71 @@
             keep-mods = <MOD_LCTL>;
         };
 
+        tap_dance_2_1: tap_dance_2_1 {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TAP_DANCE_2_1";
+            #binding-cells = <0>;
+            bindings = <&kp LESS_THAN>, <&kp GREATER_THAN>;
+        };
+
+        tap_dance_2_2: tap_dance_2_2 {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TAP_DANCE_2_2";
+            #binding-cells = <0>;
+            bindings = <&kp COMMA>, <&kp LESS_THAN>;
+        };
+
+        tap_dance_2_3: tap_dance_2_3 {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TAP_DANCE_2_3";
+            #binding-cells = <0>;
+            bindings = <&kp PERIOD>, <&kp GREATER_THAN>;
+        };
+
+        tap_dance_4_1: tap_dance_4_1 {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TAP_DANCE_4_1";
+            #binding-cells = <0>;
+            bindings = <&kp SINGLE_QUOTE>, <&kp AT_SIGN>;
+        };
+
+        tap_dance_4_2: tap_dance_4_2 {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TAP_DANCE_4_2";
+            #binding-cells = <0>;
+            bindings = <&kp Q>, <&kp RA(Q)>;
+        };
     };
 
     macros {
-       /*   Easier navigation macros.  */
+        /*   Easier navigation macros.  */
+
         four_down: four_down_macro {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_tap &kp DOWN &kp DOWN &kp DOWN &kp DOWN>;
+            bindings = <&macro_tap>, <&kp DOWN &kp DOWN &kp DOWN &kp DOWN>;
         };
 
         four_up: four_up_macro {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_tap &kp UP &kp UP &kp UP &kp UP>;
+            bindings = <&macro_tap>, <&kp UP &kp UP &kp UP &kp UP>;
         };
 
         eight_down: eight_down_macro {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_tap &kp N8 &kp DOWN>;
+            bindings = <&macro_tap>, <&kp N8 &kp DOWN>;
         };
 
         eight_up: eight_up_macro {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_tap &kp N8 &kp UP>;
+            bindings = <&macro_tap>, <&kp N8 &kp UP>;
         };
     };
 
-/* ---------------------------------------------------------------------------------------------------------------------------------------------------- 
+    /* ---------------------------------------------------------------------------------------------------------------------------------------------------- 
               ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
               ┃     b     ┃     l     ┃     d     ┃     w     ┃    z      ┃   ┃     "     ┃     f     ┃     o     ┃     u     ┃     j     ┃
               ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
@@ -189,43 +222,48 @@
     keymap {
         compatible = "zmk,keymap";
         base_layer {
-            label= "BASE";
+            label = "BASE";
             bindings = <
-                  &kp B     &kp L       &kp D         &kp W         &kp Z       &s_quote       &kp F           &kp O      &kp U   &kp J
-                  &kp N     &kp R       &kp T         &kp S         &kp G       &kp Y          &kp H           &kp A      &kp E   &kp I
-    /* &mt LCTRL ESC &kp Q     &kp X       &kp M         &kp C         &kp V       &kp K          &kp P           &s_minus   &s_dot  &s_slash  &lt 3 RET */
-    &ecc          &kp Q     &kp X       &kp M         &kp C         &kp V       &kp K          &kp P           &s_minus   &s_dot  &s_slash  &lt 3 RET
-                                        &mt LMETA TAB &slt 1 LSHFT  &spc_L0     &mm_ctrl_bspc  &caps_tdr       &kp RA(RCTRL)
+           &tap_dance_2_1  &tap_dance_2_2  &tap_dance_2_3  &kp P        &kp Z        &kp F      &kp G          &kp C            &kp R        &kp L
+           &kp A           &mt LEFT_GUI O  &mt LEFT_ALT E  &mt LCTRL U  &kp I        &kp D      &mt RCTRL H    &mt RIGHT_ALT T  &mt RMETA N  &kp S
+&kp LSHFT  &tap_dance_4_1  &tap_dance_4_2  &kp J           &kp K        &kp X        &kp B      &kp M          &kp W            &kp V        &kp Z  &kp RIGHT_SHIFT
+                                           &kp DELETE      &slt 1 TAB   &kp SPACE    &kp ENTER  &slt 2 ESCAPE  &kp BACKSPACE
             >;
         };
-/* ---------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+        /* ---------------------------------------------------------------------------------------------------------------------------------------------------- */
+
         nav_layer {
-            label= "NAV";
+            label = "NAV";
             bindings = <
-                &trans     &kp LG(N7)  &kp LG(N8)   &kp LG(N9)  &trans          &trans     &eight_down  &eight_up   &trans      &kp DEL
-                &trans     &kp LG(N4)  &kp LG(N5)   &kp LG(N6)  &trans          &kp LEFT   &kp DOWN     &kp UP      &kp RIGHT   &trans
-    &trans      &kp LG(N0) &kp LG(N1)  &kp LG(N2)   &kp LG(N3)  &trans          &trans     &four_down   &four_up    &kp GT      &kp LT     &trans
-                                       &trans       &trans      &trans          &kp COMMA  &kp SEMI     &trans
+         &kp KP_NUMBER_7  &kp KP_NUMBER_7  &kp KP_NUMBER_3  &kp KP_NUMBER_1  &kp KP_NUMBER_9    &kp KP_NUMBER_0  &kp KP_NUMBER_2  &kp KP_NUMBER_4  &kp KP_NUMBER_6  &kp KP_NUMBER_8
+         &kp F1           &kp F2           &kp F3           &kp F4           &kp F5             &kp LEFT         &kp DOWN         &kp UP           &kp RIGHT        &trans
+&kp F11  &kp F6           &kp F7           &kp F8           &kp F9           &kp F10            &kp HOME         &kp PAGE_DOWN    &kp PAGE_UP      &kp END          &trans           &trans
+                                           &trans           &trans           &trans             &trans           &trans           &trans
             >;
         };
-/* ---------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+        /* ---------------------------------------------------------------------------------------------------------------------------------------------------- */
+
         num_sym_layer {
-            label= "NSL";
+            label = "NSL";
             bindings = <
-                &kp HASH    &kp LBKT    &kp RBKT     &kp PIPE    &kp BSLH        &kp PRCNT   &kp N7      &kp N8      &kp N9     &kp ASTRK
-                &kp AT      &kp LPAR    &kp RPAR     &kp AMPS    &kp GRAVE       &kp UNDER   &kp N4      &kp N5      &kp N6     &kp EQUAL
-    &kp SEMI    &kp CARET   &kp LBRC    &kp RBRC     &kp DOLLAR  &kp TILDE       &kp EXCL    &kp N1      &kp N2      &kp N3     &kp N0      &kp QMARK
-                                        &trans       &trans      &trans          &kp BSPC    &kp COMMA   &trans
+        &kp RA(NUMBER_8)       &kp RA(NUMBER_7)  &kp RA(NUMBER_0)  &kp ASTERISK              &kp RIGHT_PARENTHESIS          &kp RIGHT_BRACE  &kp LEFT_PARENTHESIS  &kp RIGHT_BRACKET  &kp RA(NUMBER_9)  &kp EXCLAMATION
+        &kp RA(RIGHT_BRACKET)  &kp PERCENT       &kp LS(EQUAL)     &mt UNDERSCORE AMPERSAND  &mt GRAVE RA(Q)                &trans           &trans                &trans             &trans            &trans
+&trans  &kp DOLLAR             &kp CARET         &kp POUND         &mt QMARK SLASH           &mt RA(LESS_THAN) RA(MINUS)    &trans           &trans                &trans             &trans            &trans           &trans
+                                                 &kp LEFT_GUI      &trans                    &kp SPACE                      &kp ENTER        &trans                &kp LEFT_ALT
             >;
         };
-/* ---------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+        /* ---------------------------------------------------------------------------------------------------------------------------------------------------- */
+
         adjust_layer {
-            label= "ADJ";
+            label = "ADJ";
             bindings = <
-                &sys_reset   &trans     &trans       &trans      &trans          &trans      &trans      &trans       &trans      &trans
-                &bootloader  &trans     &trans       &trans      &trans          &bt BT_NXT  &trans      &trans       &trans      &trans
-    &bt BT_CLR  &out OUT_TOG &trans     &trans       &trans      &trans          &bt BT_PRV  &trans      &trans       &trans      &trans    &trans
-                                        &trans       &trans      &trans          &trans      &trans      &trans
+            &sys_reset    &trans  &trans  &trans  &trans    &trans      &trans  &trans  &trans  &trans
+            &bootloader   &trans  &trans  &trans  &trans    &bt BT_NXT  &trans  &trans  &trans  &trans
+&bt BT_CLR  &out OUT_TOG  &trans  &trans  &trans  &trans    &bt BT_PRV  &trans  &trans  &trans  &trans  &trans
+                                  &trans  &trans  &trans    &trans      &trans  &trans
             >;
         };
     };
