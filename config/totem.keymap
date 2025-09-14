@@ -193,7 +193,7 @@
             label = "NSL";
             bindings = <
         &kp RA(NUMBER_8)       &kp RA(NUMBER_7)  &kp RA(NUMBER_0)  &kp ASTERISK        &kp RIGHT_PARENTHESIS    &kp RIGHT_BRACE  &kp LEFT_PARENTHESIS  &kp RIGHT_BRACKET  &kp RA(NUMBER_9)  &kp EXCLAMATION
-        &kp RA(RIGHT_BRACKET)  &kp PERCENT       &kp LS(EQUAL)     &tap_dance_sym_3_4  &tap_dance_sym_3_5       &kp APOSTROPHE   &kp SEMICOLON         &kp LEFT_BRACKET   &kp RA(E)         &trans
+        &kp RA(RIGHT_BRACKET)  &kp PERCENT       &kp LS(EQUAL)     &tap_dance_sym_3_4  &tap_dance_sym_3_5       &kp APOSTROPHE   &kp SEMICOLON         &kp LEFT_BRACKET   &kp RA(E)         &kp MINUS
 &trans  &kp DOLLAR             &kp CARET         &kp BACKSLASH     &tap_dance_sym_4_4  &tap_dance_sym_4_5       &trans           &trans                &trans             &trans            &trans           &trans
                                                  &kp LEFT_GUI      &trans              &kp SPACE                &kp ENTER        &trans                &kp LEFT_ALT
             >;
