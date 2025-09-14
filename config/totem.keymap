@@ -155,21 +155,21 @@
             compatible = "zmk,behavior-tap-dance";
             label = "TAP_DANCE_2_2";
             #binding-cells = <0>;
-            bindings = <&kp COMMA>, <&kp LESS_THAN>;
+            bindings = <&kp COMMA>, <&kp NON_US_BACKSLASH>;
         };
 
         tap_dance_2_3: tap_dance_2_3 {
             compatible = "zmk,behavior-tap-dance";
             label = "TAP_DANCE_2_3";
             #binding-cells = <0>;
-            bindings = <&kp PERIOD>, <&kp GREATER_THAN>;
+            bindings = <&kp PERIOD>, <&kp LS(NON_US_BACKSLASH)>;
         };
 
         tap_dance_4_1: tap_dance_4_1 {
             compatible = "zmk,behavior-tap-dance";
             label = "TAP_DANCE_4_1";
             #binding-cells = <0>;
-            bindings = <&kp SINGLE_QUOTE>, <&kp AT_SIGN>;
+            bindings = <&kp LS(BACKSLASH)>, <&kp AT_SIGN>;
         };
 
         tap_dance_4_2: tap_dance_4_2 {
@@ -208,6 +208,15 @@
         };
     };
 
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+
+        media_layer_condition {
+            if-layers = <1 2>;
+            then-layer = <3>;
+        };
+    };
+
     /* ---------------------------------------------------------------------------------------------------------------------------------------------------- 
               ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
               ┃     b     ┃     l     ┃     d     ┃     w     ┃    z      ┃   ┃     "     ┃     f     ┃     o     ┃     u     ┃     j     ┃
@@ -226,7 +235,7 @@
             bindings = <
            &tap_dance_2_1  &tap_dance_2_2  &tap_dance_2_3  &kp P        &kp Z        &kp F      &kp G          &kp C            &kp R        &kp L
            &kp A           &mt LEFT_GUI O  &mt LEFT_ALT E  &mt LCTRL U  &kp I        &kp D      &mt RCTRL H    &mt RIGHT_ALT T  &mt RMETA N  &kp S
-&kp LSHFT  &tap_dance_4_1  &tap_dance_4_2  &kp J           &kp K        &kp X        &kp B      &kp M          &kp W            &kp V        &kp Z  &kp RIGHT_SHIFT
+&kp LSHFT  &tap_dance_4_1  &tap_dance_4_2  &kp J           &kp K        &kp X        &kp B      &kp M          &kp W            &kp V        &kp Y  &kp RIGHT_SHIFT
                                            &kp DELETE      &slt 1 TAB   &kp SPACE    &kp ENTER  &slt 2 ESCAPE  &kp BACKSPACE
             >;
         };
@@ -236,10 +245,10 @@
         nav_layer {
             label = "NAV";
             bindings = <
-         &kp KP_NUMBER_7  &kp KP_NUMBER_7  &kp KP_NUMBER_3  &kp KP_NUMBER_1  &kp KP_NUMBER_9    &kp KP_NUMBER_0  &kp KP_NUMBER_2  &kp KP_NUMBER_4  &kp KP_NUMBER_6  &kp KP_NUMBER_8
-         &kp F1           &kp F2           &kp F3           &kp F4           &kp F5             &kp LEFT         &kp DOWN         &kp UP           &kp RIGHT        &trans
-&kp F11  &kp F6           &kp F7           &kp F8           &kp F9           &kp F10            &kp HOME         &kp PAGE_DOWN    &kp PAGE_UP      &kp END          &trans           &trans
-                                           &trans           &trans           &trans             &trans           &trans           &trans
+        &kp KP_NUMBER_7  &kp KP_NUMBER_7  &kp KP_NUMBER_3  &kp KP_NUMBER_1  &kp KP_NUMBER_9    &kp KP_NUMBER_0  &kp KP_NUMBER_2  &kp KP_NUMBER_4  &kp KP_NUMBER_6  &kp KP_NUMBER_8
+        &kp F1           &kp F2           &kp F3           &kp F4           &kp F5             &kp LEFT         &kp DOWN         &kp UP           &kp RIGHT        &trans
+&trans  &kp F6           &kp F7           &kp F8           &kp F9           &kp F10            &kp HOME         &kp PAGE_DOWN    &kp PAGE_UP      &kp END          &trans           &trans
+                                          &kp F11          &trans           &kp F12            &trans           &trans           &trans
             >;
         };
 
@@ -248,10 +257,10 @@
         num_sym_layer {
             label = "NSL";
             bindings = <
-        &kp RA(NUMBER_8)       &kp RA(NUMBER_7)  &kp RA(NUMBER_0)  &kp ASTERISK              &kp RIGHT_PARENTHESIS          &kp RIGHT_BRACE  &kp LEFT_PARENTHESIS  &kp RIGHT_BRACKET  &kp RA(NUMBER_9)  &kp EXCLAMATION
-        &kp RA(RIGHT_BRACKET)  &kp PERCENT       &kp LS(EQUAL)     &mt UNDERSCORE AMPERSAND  &mt GRAVE RA(Q)                &trans           &trans                &trans             &trans            &trans
-&trans  &kp DOLLAR             &kp CARET         &kp POUND         &mt QMARK SLASH           &mt RA(LESS_THAN) RA(MINUS)    &trans           &trans                &trans             &trans            &trans           &trans
-                                                 &kp LEFT_GUI      &trans                    &kp SPACE                      &kp ENTER        &trans                &kp LEFT_ALT
+        &kp RA(NUMBER_8)       &kp RA(NUMBER_7)  &kp RA(NUMBER_0)  &kp ASTERISK              &kp RIGHT_PARENTHESIS                 &kp RIGHT_BRACE  &kp LEFT_PARENTHESIS  &kp RIGHT_BRACKET  &kp RA(NUMBER_9)  &kp EXCLAMATION
+        &kp RA(RIGHT_BRACKET)  &kp PERCENT       &kp LS(EQUAL)     &mt UNDERSCORE AMPERSAND  &mt GRAVE RA(Q)                       &kp APOSTROPHE   &kp SEMICOLON         &kp LEFT_BRACKET   &kp RA(E)         &trans
+&trans  &kp DOLLAR             &kp CARET         &kp BACKSLASH     &mt QMARK SLASH           &mt RA(NON_US_BACKSLASH) RA(MINUS)    &trans           &trans                &trans             &trans            &trans           &trans
+                                                 &kp LEFT_GUI      &trans                    &kp SPACE                             &kp ENTER        &trans                &kp LEFT_ALT
             >;
         };
 
@@ -260,10 +269,10 @@
         adjust_layer {
             label = "ADJ";
             bindings = <
-            &sys_reset    &trans  &trans  &trans  &trans    &trans      &trans  &trans  &trans  &trans
-            &bootloader   &trans  &trans  &trans  &trans    &bt BT_NXT  &trans  &trans  &trans  &trans
-&bt BT_CLR  &out OUT_TOG  &trans  &trans  &trans  &trans    &bt BT_PRV  &trans  &trans  &trans  &trans  &trans
-                                  &trans  &trans  &trans    &trans      &trans  &trans
+            &sys_reset    &trans  &trans  &trans  &trans        &trans          &trans             &trans           &trans  &trans
+            &bootloader   &trans  &trans  &trans  &bt BT_NXT    &kp C_PREVIOUS  &kp C_PLAY_PAUSE   &kp C_NEXT       &trans  &trans
+&bt BT_CLR  &out OUT_TOG  &trans  &trans  &trans  &bt BT_PRV    &kp C_MUTE      &kp C_VOLUME_DOWN  &kp C_VOLUME_UP  &trans  &trans  &trans
+                                  &trans  &trans  &trans        &trans          &trans             &trans
             >;
         };
     };
